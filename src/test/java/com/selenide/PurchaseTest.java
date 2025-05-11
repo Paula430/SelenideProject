@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Condition.text;
 
 public class PurchaseTest extends BaseTest{
     @Test
-    void addToCartFromHomePageTest() {
+    void addToCartTest() {
         LoginPage loginPage = new LoginPage();
 
         HomePage homePage= loginPage.login("standard_user", "secret_sauce");
@@ -21,7 +21,7 @@ public class PurchaseTest extends BaseTest{
     }
 
     @Test
-    void removeProductFromHomePageTest() {
+    void removeFromCartFromHomePageTest() {
         LoginPage loginPage = new LoginPage();
 
         // Login and add product
@@ -35,7 +35,7 @@ public class PurchaseTest extends BaseTest{
     }
 
     @Test
-    void testAddAndRemoveFromCartPage() {
+    void removeFromCartFromCartPageTest() {
         LoginPage loginPage = new LoginPage();
         CartPage cartPage = new CartPage();
 
@@ -49,7 +49,7 @@ public class PurchaseTest extends BaseTest{
     }
 
     @Test
-    void testAddAndCheckout() {
+    void fullCheckoutTest() {
         LoginPage loginPage = new LoginPage();
         CartPage cartPage = new CartPage();
         CheckoutPage checkoutPage = new CheckoutPage();

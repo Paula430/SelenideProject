@@ -19,7 +19,7 @@ public class NavigationTest extends BaseTest{
     }
 
     @Test
-    void shouldNavigateToAboutPage() {
+    void navigateToAboutPageTest() {
         LoginPage loginPage = new LoginPage();
         HomePage homePage=loginPage.login("standard_user", "secret_sauce");
         homePage.menuButton.click();
