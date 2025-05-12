@@ -1,4 +1,4 @@
-package com.selenide;
+package com.selenide.web;
 
 import com.selenide.pages.CartPage;
 import com.selenide.pages.CheckoutPage;

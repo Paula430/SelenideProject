@@ -1,4 +1,4 @@
-package com.selenide;
+package com.selenide.web;
 
 import com.selenide.pages.HomePage;
 import com.selenide.pages.LoginPage;
@@ -30,6 +30,5 @@ public class LoginTest extends BaseTest {
         loginPage.login("incorrect_user", "wrong_password");
         assertEquals("Epic sadface: Username and password do not match any user in this service",loginPage.getErrorMsgText());
     }
-
 
 }

@@ -32,9 +32,9 @@
       <version>2.29.1</version>
     </dependency>
     <dependency>
-      <groupId>org.testng</groupId>
-      <artifactId>testng</artifactId>
-      <version>7.10.2</version>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>5.5.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

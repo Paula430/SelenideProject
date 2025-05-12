@@ -28,7 +28,7 @@ Automated test suite for SauceDemo web application using Selenide, Maven, and JU
    ├── main/
    │   └── java/
    │       └── com/selenide/
-   │           └── pages/                 //represent pages
+   │           └── pages/                       //represent pages
    │               ├── CartPage.java       
    │               ├── CheckoutPage.java
    │               ├── HomePage.java
@@ -36,11 +36,14 @@ Automated test suite for SauceDemo web application using Selenide, Maven, and JU
    │
    └── test/
        └── java/
-           └── com/selenide/              //classes related to tests 
-              ├── BaseTest.java           //common setup logic
-              ├── LoginTest.java          
-              ├── NavigationTest.java     
-              └── PurchaseTest.java       
+           └── com/selenide/                    //classes related to tests 
+              ├── api/                          // api tests 
+              │   └── APITest.java
+              └── web/                          //UI tests  
+                  ├── BaseTest.java             //common setup logic
+                  ├── LoginTest.java          
+                  ├── NavigationTest.java     
+                  └── PurchaseTest.java       
 ```
 ## Setup and installation
 1. Clone the repository
