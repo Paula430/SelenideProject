@@ -2,10 +2,12 @@ package com.selenide;
 
 import com.selenide.pages.HomePage;
 import com.selenide.pages.LoginPage;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import static com.codeborne.selenide.Condition.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Tag("regression")
+@Tag("smoke")
 public class LoginTest extends BaseTest {
 
     @Test
@@ -28,5 +30,6 @@ public class LoginTest extends BaseTest {
         loginPage.login("incorrect_user", "wrong_password");
         assertEquals("Epic sadface: Username and password do not match any user in this service",loginPage.getErrorMsgText());
     }
+
 
 }

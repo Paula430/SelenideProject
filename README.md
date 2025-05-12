@@ -47,7 +47,7 @@ Automated test suite for SauceDemo web application using Selenide, Maven, and JU
 ```` bash
 git clone https://github.com/Paula430/SelenideProject.git
 ````
-3. Navigate to project directory
+2. Navigate to project directory
 ```` bash
 cd SelenideProject
 ````
@@ -56,11 +56,39 @@ cd SelenideProject
 mvn clean install
 ````
 
-## Running tests
-### Run all tests
-```` bash
+### Run All Tests
+```bash
 mvn test
-````
+```
+
+### Run Tests by Group
+1. Tag tests with JUnit 5 `@Tag` annotation:
+```java
+@Tag("smoke")
+@Test
+void loginTest() { ... }
+```
+
+2. Execute grouped tests:
+```bash
+# Single group
+mvn test -Dgroups="smoke"
+
+```
+
+### Run Specific Test Scenario
+```bash
+# Run single method
+mvn test -Dtest="NavigationTest"
+```
+
+### Run Specific Test Case
+```bash
+# Run single method
+mvn test -Dtest="NavigationTest#logoutTest"
+```
+
+
 
 
 

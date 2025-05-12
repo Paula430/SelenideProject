@@ -4,9 +4,12 @@ import com.selenide.pages.CartPage;
 import com.selenide.pages.CheckoutPage;
 import com.selenide.pages.HomePage;
 import com.selenide.pages.LoginPage;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+@Tag("checkout")
+@Tag("regression")
 public class PurchaseTest extends BaseTest{
 
     @Test
