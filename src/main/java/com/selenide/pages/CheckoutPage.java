@@ -1,26 +1,52 @@
 package com.selenide.pages;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+
 import static com.codeborne.selenide.Selenide.*;
 
 public class CheckoutPage {
-    SelenideElement firstName = $("#first-name");
-    SelenideElement lastName = $("#last-name");
-    SelenideElement postalCode = $("#postal-code");
-    SelenideElement continueButton = $("#continue");
-    SelenideElement finishButton = $("#finish");
-    SelenideElement completeHeader = $(".complete-header");
+    private final SelenideElement firstNameInput = $("#first-name");
+    private final SelenideElement lastNameInput = $("#last-name");
+    private final SelenideElement postalCodeInput = $("#postal-code");
+    private final SelenideElement continueButton = $("#continue");
+    private final SelenideElement finishButton = $("#finish");
+    private final SelenideElement subpageTitle=$(".title");
+    private final ElementsCollection productList = $$(".cart_item");
+    private final SelenideElement completeHeader = $(".complete-header");
 
     public void fillCheckoutInfo(String first, String last, String zip) {
-        firstName.setValue(first);
-        lastName.setValue(last);
-        postalCode.setValue(zip);
+        firstNameInput.setValue(first);
+        lastNameInput.setValue(last);
+        postalCodeInput.setValue(zip);
+    }
+
+    public void clickContinueBtn(){
         continueButton.click();
     }
 
-    public void completePurchase() {
+    public String getSubpageTitle(){
+        return subpageTitle.text();
+    }
+
+    public void clickFinishButton() {
         finishButton.click();
+    }
+
+    public List<String> getProductNames() {
+        return productList.stream()
+                .map(item -> item.$(".inventory_item_name").text())
+                .collect(Collectors.toList());
+    }
+
+    public String getSuccessMessage() {
+        return completeHeader.text();
 
     }
+
 
 }

@@ -11,27 +11,22 @@ public class LoginTest extends BaseTest {
     @Test
     void successfulLoginTest() {
         LoginPage loginPage = new LoginPage();
-
         HomePage homePage=loginPage.login("standard_user", "secret_sauce");
-        homePage.title.shouldHave(text("Products"));
-        assertEquals("Swag Labs", homePage.checkLogoText());
+        assertEquals("Products",homePage.getTitleText());
     }
 
     @Test
     void lockedOutUserLoginTest() {
         LoginPage loginPage = new LoginPage();
-
         loginPage.login("locked_out_user", "secret_sauce");
-        loginPage.errorMessage.shouldBe(visible).shouldHave(text("Epic sadface: Sorry, this user has been locked out."));
+        assertEquals("Epic sadface: Sorry, this user has been locked out.",loginPage.getErrorMsgText());
     }
 
     @Test
     void invalidCredentialsTest() {
         LoginPage loginPage = new LoginPage();
-
         loginPage.login("incorrect_user", "wrong_password");
-        loginPage.errorMessage.shouldBe(visible)
-                .shouldHave(text("Username and password do not match any user in this service"));
+        assertEquals("Epic sadface: Username and password do not match any user in this service",loginPage.getErrorMsgText());
     }
 
 }

@@ -7,8 +7,7 @@ Automated test suite for SauceDemo web application using Selenide, Maven, and JU
 - **Login Functionality Testing**
 - **Cart Management Operations**
     - Add/Remove products from Home Page
-    - Add/Remove products from Cart Page
-    - Multi-product scenarios
+    - Remove products from Cart Page
 - **Checkout Process Validation**
 - **Navigation Testing**
     - About Page verification
@@ -38,7 +37,7 @@ Automated test suite for SauceDemo web application using Selenide, Maven, and JU
    └── test/
        └── java/
            └── com/selenide/              //classes related to tests 
-              ├── BaseTest.java           //common setup and teardown logic
+              ├── BaseTest.java           //common setup logic
               ├── LoginTest.java          
               ├── NavigationTest.java     
               └── PurchaseTest.java       
