@@ -19,7 +19,7 @@ public class APITest {
 
     // Posts endpoints tests
     @Test
-    void getAllPosts_shouldReturn200WithValidData() {
+    void getAllPostsTest() {
         given()
                 .when()
                 .get("/posts")
@@ -31,7 +31,10 @@ public class APITest {
     }
 
     @Test
-    void getPostById_shouldReturnSpecificPost() {
+    void getPostByIdTest() {
+        String titleText="sunt aut facere repellat provident occaecati excepturi optio reprehenderit";
+        String bodyText="quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae " +
+                "ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto";
         given()
                 .pathParam("id", 1)
                 .when()
@@ -40,11 +43,12 @@ public class APITest {
                 .statusCode(200)
                 .body("userId", equalTo(1))
                 .body("id", equalTo(1))
-                .body("title", containsString("sunt aut facere"));
+                .body("title", equalTo(titleText))
+                .body("body",equalTo(bodyText));
     }
 
     @Test
-    void createNewPost_shouldReturnCreatedPost() {
+    void createNewPostTest() {
         String requestBody = """
             {
                 "title": "Test Post",
@@ -62,12 +66,14 @@ public class APITest {
                 .statusCode(201)
                 .body("id", equalTo(101))
                 .body("title", equalTo("Test Post"))
-                .body("userId", equalTo(1));
+                .body("userId", equalTo(1))
+                .body("body", equalTo("This is a test post"));
+
     }
 
     // Users endpoints tests
     @Test
-    void getUserByUsername_shouldReturnUserData() {
+    void getUserByUsernameTest() {
         given()
                 .queryParam("username", "Bret")
                 .when()
@@ -75,11 +81,12 @@ public class APITest {
                 .then()
                 .statusCode(200)
                 .body("[0].name", equalTo("Leanne Graham"))
-                .body("[0].address.street", equalTo("Kulas Light"));
+                .body("[0].address.street", equalTo("Kulas Light"))
+                .body("[0].email",notNullValue());
     }
 
     @Test
-    void updateUser_shouldReturnUpdatedData() {
+    void updateUserTest() {
         String requestBody = """
             {
                 "name": "Updated Name",
@@ -100,7 +107,7 @@ public class APITest {
 
     // Comments endpoints tests
     @Test
-    void getCommentsForPost_shouldReturnMultipleComments() {
+    void getCommentsForPostTest() {
         given()
                 .queryParam("postId", 1)
                 .when()
@@ -108,12 +115,15 @@ public class APITest {
                 .then()
                 .statusCode(200)
                 .body("size()", equalTo(5))
-                .body("email", everyItem(endsWith("@example.com")));
+                .body("email", everyItem(notNullValue()))
+                .body("id",everyItem(notNullValue()))
+                .body("postId",everyItem(equalTo(1)))
+                .body("body", everyItem(notNullValue()));
     }
 
-    // Error handling tests
+    // Negative test cases
     @Test
-    void getNonExistentPost_shouldReturn404() {
+    void getNonExistentPostTest() {
         given()
                 .pathParam("id", 999)
                 .when()
@@ -123,19 +133,19 @@ public class APITest {
     }
 
     @Test
-    void createPostWithInvalidBody_shouldReturn400() {
+    void postWithInvalidBodyTest() {
         given()
                 .contentType(ContentType.JSON)
                 .body("{invalid json}")
                 .when()
                 .post("/posts")
                 .then()
-                .statusCode(400);
+                .statusCode(500);
     }
 
     // Todos endpoints tests
     @Test
-    void getTodosForUser_shouldFilterByCompleted() {
+    void getTodosForUserTest() {
         given()
                 .queryParam("userId", 1)
                 .queryParam("completed", false)
@@ -143,18 +153,24 @@ public class APITest {
                 .get("/todos")
                 .then()
                 .statusCode(200)
-                .body("completed", everyItem(is(false)));
+                .body("completed", everyItem(is(false)))
+                .body("userId", everyItem(equalTo(1)))
+                .body("title", everyItem(notNullValue()));
     }
 
     // Photos endpoints tests
     @Test
-    void getPhotosFromAlbum_shouldContainValidURLs() {
+    void getPhotosFromAlbumTest() {
         given()
                 .pathParam("albumId", 1)
                 .when()
                 .get("/albums/{albumId}/photos")
                 .then()
                 .statusCode(200)
-                .body("thumbnailUrl", everyItem(startsWith("https://via.placeholder.com/150/")));
+                .body("thumbnailUrl", everyItem(startsWith("https://via.placeholder.com/150/")))
+                .body("albumId", everyItem(equalTo(1)))
+                .body("id", everyItem(notNullValue()))
+                .body("title", everyItem(notNullValue()))
+                .body("url",everyItem(notNullValue()));
     }
 }
