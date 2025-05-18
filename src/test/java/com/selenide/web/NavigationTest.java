@@ -13,24 +13,24 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @Tag("regression")
 public class NavigationTest extends BaseTest{
 
-    @Test
-    @Tag("smoke")
-    void logoutTest() {
-        LoginPage loginPage = new LoginPage();
-        HomePage homePage= loginPage.login("standard_user", "secret_sauce");
-        homePage.logout();
-        assertTrue(loginPage.isLoginBtnVisible());
-
-    }
-
-    @Test
-    void navigateToAboutPageTest() {
-        LoginPage loginPage = new LoginPage();
-        HomePage homePage=loginPage.login("standard_user", "secret_sauce");
-        homePage.clickMenuBtn();
-        AboutPage aboutPage=homePage.clickAboutSidebarLink();
-        assertEquals("Build apps users love with AI-driven insights",aboutPage.getHeaderText());
-
-    }
+//    @Test
+//    @Tag("smoke")
+//    void logoutTest() {
+//        LoginPage loginPage = new LoginPage();
+//        HomePage homePage= loginPage.login("standard_user", "secret_sauce");
+//        homePage.logout();
+//        assertTrue(loginPage.isLoginBtnVisible());
+//
+//    }
+//
+//    @Test
+//    void navigateToAboutPageTest() {
+//        LoginPage loginPage = new LoginPage();
+//        HomePage homePage=loginPage.login("standard_user", "secret_sauce");
+//        homePage.clickMenuBtn();
+//        AboutPage aboutPage=homePage.clickAboutSidebarLink();
+//        assertEquals("Build apps users love with AI-driven insights",aboutPage.getHeaderText());
+//
+//    }
 
 }

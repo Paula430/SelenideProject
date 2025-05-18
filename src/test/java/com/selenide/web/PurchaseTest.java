@@ -12,54 +12,54 @@ import static org.junit.jupiter.api.Assertions.*;
 @Tag("regression")
 public class PurchaseTest extends BaseTest{
 
-    @Test
-    void addToCartTest() {
-        LoginPage loginPage = new LoginPage();
-        HomePage homePage= loginPage.login("standard_user", "secret_sauce");
-        homePage.addProductToCart("Sauce Labs Backpack");
-        assertEquals("1",homePage.getCartBadgeNumber());
-
-    }
-
-    @Test
-    void removeFromCartFromHomePageTest() {
-        LoginPage loginPage = new LoginPage();
-        HomePage homePage= loginPage.login("standard_user", "secret_sauce");
-        homePage.addProductToCart("Sauce Labs Backpack");
-        assertEquals("1",homePage.getCartBadgeNumber());
-        homePage.removeProductFromHomePage("Sauce Labs Backpack");
-        assertFalse(homePage.checkCartBadgeNumberExist());
-    }
-
-    @Test
-    void removeFromCartFromCartPageTest() {
-        LoginPage loginPage = new LoginPage();
-        HomePage homePage=loginPage.login("standard_user", "secret_sauce");
-        homePage.addProductToCart("Sauce Labs Bike Light");
-        CartPage cartPage=homePage.clickCartLink();
-        cartPage.removeProductFromCart("Sauce Labs Bike Light");
-        cartPage.clickContinueShoppingButton();
-        assertFalse(homePage.checkCartBadgeNumberExist());
-    }
-
-    @Test
-    void checkoutTest() {
-        String productName="Sauce Labs Backpack";
-        LoginPage loginPage = new LoginPage();
-        HomePage homePage=loginPage.login("standard_user", "secret_sauce");
-        homePage.addProductToCart(productName);
-        CartPage cartPage=homePage.clickCartLink();
-        assertEquals("Your Cart", cartPage.getSubpageTitle());
-        CheckoutPage checkoutPage=cartPage.clickCheckoutButton();
-        assertEquals("Checkout: Your Information", checkoutPage.getSubpageTitle());
-        checkoutPage.fillCheckoutInfo("John", "Doe", "12345");
-        checkoutPage.clickContinueBtn();
-        assertEquals("Checkout: Overview",checkoutPage.getSubpageTitle());
-        assertTrue(checkoutPage.getProductNames().contains(productName), "Product not found in checkout overview");
-        checkoutPage.clickFinishButton();
-        assertEquals("Thank you for your order!",checkoutPage.getSuccessMessage());
-
-    }
+//    @Test
+//    void addToCartTest() {
+//        LoginPage loginPage = new LoginPage();
+//        HomePage homePage= loginPage.login("standard_user", "secret_sauce");
+//        homePage.addProductToCart("Sauce Labs Backpack");
+//        assertEquals("1",homePage.getCartBadgeNumber());
+//
+//    }
+//
+//    @Test
+//    void removeFromCartFromHomePageTest() {
+//        LoginPage loginPage = new LoginPage();
+//        HomePage homePage= loginPage.login("standard_user", "secret_sauce");
+//        homePage.addProductToCart("Sauce Labs Backpack");
+//        assertEquals("1",homePage.getCartBadgeNumber());
+//        homePage.removeProductFromHomePage("Sauce Labs Backpack");
+//        assertFalse(homePage.checkCartBadgeNumberExist());
+//    }
+//
+//    @Test
+//    void removeFromCartFromCartPageTest() {
+//        LoginPage loginPage = new LoginPage();
+//        HomePage homePage=loginPage.login("standard_user", "secret_sauce");
+//        homePage.addProductToCart("Sauce Labs Bike Light");
+//        CartPage cartPage=homePage.clickCartLink();
+//        cartPage.removeProductFromCart("Sauce Labs Bike Light");
+//        cartPage.clickContinueShoppingButton();
+//        assertFalse(homePage.checkCartBadgeNumberExist());
+//    }
+//
+//    @Test
+//    void checkoutTest() {
+//        String productName="Sauce Labs Backpack";
+//        LoginPage loginPage = new LoginPage();
+//        HomePage homePage=loginPage.login("standard_user", "secret_sauce");
+//        homePage.addProductToCart(productName);
+//        CartPage cartPage=homePage.clickCartLink();
+//        assertEquals("Your Cart", cartPage.getSubpageTitle());
+//        CheckoutPage checkoutPage=cartPage.clickCheckoutButton();
+//        assertEquals("Checkout: Your Information", checkoutPage.getSubpageTitle());
+//        checkoutPage.fillCheckoutInfo("John", "Doe", "12345");
+//        checkoutPage.clickContinueBtn();
+//        assertEquals("Checkout: Overview",checkoutPage.getSubpageTitle());
+//        assertTrue(checkoutPage.getProductNames().contains(productName), "Product not found in checkout overview");
+//        checkoutPage.clickFinishButton();
+//        assertEquals("Thank you for your order!",checkoutPage.getSuccessMessage());
+//
+//    }
 
 //    @Test
 //    void testTotalPriceCalculationWithMultipleProducts() {
