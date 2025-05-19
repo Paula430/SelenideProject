@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-@Tag("checkout")
-@Tag("regression")
-public class PurchaseTest extends BaseTest{
+//@Tag("checkout")
+//@Tag("regression")
+//public class PurchaseTest extends BaseTest{
 
 //    @Test
 //    void addToCartTest() {
@@ -106,4 +106,4 @@ public class PurchaseTest extends BaseTest{
 
 
 
-}
+//}
