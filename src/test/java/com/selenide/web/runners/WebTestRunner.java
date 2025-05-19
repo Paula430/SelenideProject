@@ -13,12 +13,13 @@ import static io.cucumber.junit.platform.engine.Constants.*;
         ),
         @ConfigurationParameter(
                 key = FEATURES_PROPERTY_NAME,
-                value = "classpath:features"
+                value = "classpath:features.web"
         ),
         @ConfigurationParameter(
                 key = FILTER_TAGS_PROPERTY_NAME,
                 value = "@web"
-        )
+        ),
+
 })
 
 public class WebTestRunner {

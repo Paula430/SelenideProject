@@ -3,11 +3,10 @@ package com.selenide.web.steps;
 import com.selenide.pages.CartPage;
 import com.selenide.pages.CheckoutPage;
 import com.selenide.pages.HomePage;
-import com.selenide.pages.LoginPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.jupiter.api.Test;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,7 +18,7 @@ public class PurchaseSteps {
 
     @And("I add {string} to the cart")
     public void addProductToCart(String productName){
-        homePage.addProductToCart("Sauce Labs Backpack");
+        homePage.addProductToCart(productName);
     }
 
     @Then("The cart badge should show {string}")
@@ -52,7 +51,7 @@ public class PurchaseSteps {
         cartPage.clickContinueShoppingButton();
     }
 
-    @And("I proceed to checkout")
+    @When("I proceed to checkout")
     public void clickCheckoutBtn(){
         cartPage.clickCheckoutButton();
     }
@@ -87,4 +86,8 @@ public class PurchaseSteps {
         assertEquals(message,checkoutPage.getSuccessMessage());
     }
 
+    @Then("I should see product {string} in the cart")
+    public void verifyProductInCart(String productName){
+        assertTrue(cartPage.getProductNamesInCart().contains(productName));
+    }
 }

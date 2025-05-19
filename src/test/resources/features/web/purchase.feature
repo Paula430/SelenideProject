@@ -7,6 +7,8 @@ Feature: Product purchase flow
     And I click the login button
     And I add "Sauce Labs Backpack" to the cart
     Then The cart badge should show "1"
+    When I go to the cart
+    Then I should see product "Sauce Labs Backpack" in the cart
 
   @cart
   Scenario: Remove a product from the home page
@@ -36,7 +38,8 @@ Feature: Product purchase flow
     And I click the login button
     And I add "Sauce Labs Backpack" to the cart
     And I go to the cart
-    And I proceed to checkout
+    Then I should see product "Sauce Labs Backpack" in the cart
+    When I proceed to checkout
     Then I should see the subpage title "Checkout: Your Information"
     When I fill in checkout info with first name "John", last name "Doe", and postal code "12345"
     And I continue to overview
