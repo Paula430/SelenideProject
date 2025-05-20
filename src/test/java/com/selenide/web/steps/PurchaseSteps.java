@@ -3,22 +3,34 @@ package com.selenide.web.steps;
 import com.selenide.pages.CartPage;
 import com.selenide.pages.CheckoutPage;
 import com.selenide.pages.HomePage;
+import com.selenide.web.context.TestContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PurchaseSteps {
 
-    HomePage homePage= new HomePage();
-    CartPage cartPage= new CartPage();
-    CheckoutPage checkoutPage= new CheckoutPage();
+    private final HomePage homePage= new HomePage();
+    private final CartPage cartPage= new CartPage();
+    private final CheckoutPage checkoutPage= new CheckoutPage();
+
+    private final TestContext context;
+
+    public PurchaseSteps(TestContext context){
+        this.context=context;
+    }
+
 
     @And("I add {string} to the cart")
     public void addProductToCart(String productName){
-        homePage.addProductToCart(productName);
+        double price=homePage.addProductToCart(productName);
+        context.expectedItemTotal+=price;
     }
 
     @Then("The cart badge should show {string}")
@@ -89,5 +101,31 @@ public class PurchaseSteps {
     @Then("I should see product {string} in the cart")
     public void verifyProductInCart(String productName){
         assertTrue(cartPage.getProductNamesInCart().contains(productName));
+    }
+
+    @Then("I should see item total equal to the sum of {string} and {string}")
+    public void verifyTotalItemPrice(String product1, String product2){
+        BigDecimal expected = BigDecimal.valueOf(context.expectedItemTotal).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal actual = BigDecimal.valueOf(checkoutPage.getSubTotalPrice()).setScale(2, RoundingMode.HALF_UP);
+        assertEquals(expected,actual);
+
+    }
+
+    @And("I should see the correct tax value")
+    public void verifyTaxValue(){
+        BigDecimal expectedTax = BigDecimal.valueOf(context.expectedItemTotal)
+                .multiply(BigDecimal.valueOf(0.08))
+                .setScale(2, RoundingMode.HALF_UP);
+        BigDecimal actualTax = BigDecimal.valueOf(checkoutPage.getTaxPrice()).setScale(2, RoundingMode.HALF_UP);
+        assertEquals(expectedTax, actualTax);
+    }
+
+    @And("I should see the correct total with tax")
+    public void verifyTotalWithTax(){
+        BigDecimal expectedTotal = BigDecimal.valueOf(context.expectedItemTotal)
+                .multiply(BigDecimal.valueOf(1.08))
+                .setScale(2, RoundingMode.HALF_UP);
+        BigDecimal actualTotal = BigDecimal.valueOf(checkoutPage.getSummaryTotalPrice()).setScale(2, RoundingMode.HALF_UP);
+        assertEquals(expectedTotal, actualTotal);
     }
 }

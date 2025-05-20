@@ -71,6 +71,12 @@
       <version>1.10.0</version> <!-- or match your Jupiter version, e.g. 1.10.0 with Jupiter 5.10.0 -->
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-picocontainer</artifactId>
+      <version>7.21.1</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>

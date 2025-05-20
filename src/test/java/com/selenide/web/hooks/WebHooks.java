@@ -19,6 +19,7 @@ public class WebHooks {
 
     @Before("@web")
     public void openBrowser() {
+
         open("https://www.saucedemo.com/");
         WebDriverRunner.getWebDriver().manage().window().maximize();
     }

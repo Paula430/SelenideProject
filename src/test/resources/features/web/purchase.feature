@@ -47,3 +47,18 @@ Feature: Product purchase flow
     And I should see the product "Sauce Labs Backpack" in checkout
     When I finish the checkout
     Then I should see the message "Thank you for your order!"
+
+  @checkout
+  Scenario: Verify total price and tax calculation with multiple products
+    Given I am on the login page
+    When I enter username "standard_user" and password "secret_sauce"
+    And I click the login button
+    And I add "Sauce Labs Backpack" to the cart
+    And I add "Sauce Labs Bike Light" to the cart
+    And I go to the cart
+    And I proceed to checkout
+    And I fill in checkout info with first name "John", last name "Doe", and postal code "12345"
+    And I continue to overview
+    Then I should see item total equal to the sum of "Sauce Labs Backpack" and "Sauce Labs Bike Light"
+    And I should see the correct tax value
+    And I should see the correct total with tax

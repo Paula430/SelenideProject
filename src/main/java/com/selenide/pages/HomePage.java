@@ -2,6 +2,7 @@ package com.selenide.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.WebElement;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -21,8 +22,12 @@ public class HomePage {
         logoutLink.click();
     }
 
-    public void addProductToCart(String productName) {
+    public double addProductToCart(String productName) {
         productList.findBy(text(productName)).$("button.btn_inventory").click();
+        String[] splitArray=productList.findBy(text(productName)).$(".inventory_item_price").text().split("[$]");
+        String price= splitArray[splitArray.length-1];
+        return Double.parseDouble(price);
+
     }
 
     public void removeProductFromHomePage(String productName) {

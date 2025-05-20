@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
 public class CheckoutPage {
@@ -18,6 +19,9 @@ public class CheckoutPage {
     private final SelenideElement subpageTitle=$(".title");
     private final ElementsCollection productList = $$(".cart_item");
     private final SelenideElement completeHeader = $(".complete-header");
+    private final SelenideElement itemSubtotalText=$(".summary_subtotal_label");
+    private final SelenideElement summaryTotalText=$(".summary_total_label");
+    private final SelenideElement taxText=$(".summary_tax_label");
 
     public void fillCheckoutInfo(String first, String last, String zip) {
         firstNameInput.setValue(first);
@@ -47,6 +51,26 @@ public class CheckoutPage {
         return completeHeader.text();
 
     }
+
+    private double getPriceFromString(String text){
+        String[] splitArray=text.split("[$]");
+        return Double.parseDouble(splitArray[splitArray.length-1]);
+
+    }
+
+    public double getSubTotalPrice(){
+        return getPriceFromString(itemSubtotalText.text());
+    }
+
+    public double getTaxPrice(){
+        return getPriceFromString(taxText.text());
+    }
+
+    public double getSummaryTotalPrice(){
+        return getPriceFromString(summaryTotalText.text());
+    }
+
+
 
 
 }
