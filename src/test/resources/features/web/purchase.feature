@@ -1,6 +1,6 @@
-@web @purchase
+@web @purchase @regression
 Feature: Product purchase flow
-  @cart
+  @cart @smoke
   Scenario: Add a product to the cart
     Given I am on the login page
     When I enter username "standard_user" and password "secret_sauce"

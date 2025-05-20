@@ -11,4 +11,4 @@ import static io.cucumber.junit.platform.engine.Constants.*;
         @ConfigurationParameter(key = FEATURES_PROPERTY_NAME, value = "classpath:features/api"),
         @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty, summary")
 })
-public class ApiTestRunner {}
+public class APIRunnerTest {}

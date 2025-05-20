@@ -1,4 +1,4 @@
-@web @navigation
+@web @navigation @regression @smoke
 Feature: Navigation through application
   @logout
   Scenario: Logs out successfully
@@ -8,7 +8,7 @@ Feature: Navigation through application
     And I click the logout button
     Then I should see the login button
 
-  @about
+  @aboutPage
   Scenario: Navigate to About page
     Given I am on the login page
     When I enter username "standard_user" and password "secret_sauce"
